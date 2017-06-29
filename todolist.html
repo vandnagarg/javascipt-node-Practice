@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TodoList</title>
+</head>
+<body>
+<input type = "text" id="input_work"/>
+<button type="submit" onclick="add_work()"> Add</button>
+<!-- <ul id="add">
+	<li id="mLi"></li>
+</ul> -->
+<script >
+	function add_work()
+	{
+		var x = document.getElementById("input_work").value;
+		var ul = document.createElement("UL")
+		ul.setAttribute("id","mul")
+		document.body.appendChild(ul);
+
+		var li = document.createElement("LI")
+		var item = document.createTextNode(x)
+
+		li.appendChild(item)
+
+		document.getElementById("mul").prepend(li);
+	}
+</script>
+</body>
+</html>
