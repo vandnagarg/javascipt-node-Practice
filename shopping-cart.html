@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src = "jquery.js"></script>
+	<title> Shopping cart</title>
+</head>
+<body>
+	
+	<span id="item_name1" class=''>item1 40  <button id="btn_click" class="abv"  >Add item</button><button id="btn_click2" class="abv"  >Remove Item</button></span><br/>
+	<span id="item_name2" class=''>item2 40  <button id="btn_click" class="abv" >Add item</button><button id="btn_click2" class="abv"  >Remove Item</button></span><br/>
+	<span id="item_name3" class=''>item3 40  <button id="btn_click" class="abv" >Add item</button><button id="btn_click2" class="abv"  >Remove Item</button></span><br/>
+	<span id="item_name4" class=''>item4 40  <button id="btn_click" class="abv" >Add item</button><button id="btn_click2" class="abv"  >Remove Item</button></span><br/>
+	<span id="item_name5" class=''>item5 40  <button id="btn_click" class="abv" >Add item</button><button id="btn_click2" class="abv"  >Remove Item</button></span><br/>
+	<span id="item_name6" class=''>item6 40  <button id="btn_click" class="abv" >Add item</button><button id="btn_click2" class="abv"  >Remove Item</button></span><br/>
+
+ <div >
+	
+	
+		<table id ="table_add">
+				
+		</table>
+		
+	</div>
+	<script>
+	var data = []
+	var f=0
+	function retreiveItems(){
+
+		data=JSON.parse(localStorage.getItem('table_store')?localStorage.getItem('table_store'):'[]');
+
+	}
+	function refreshItems(){
+				$('#table_add').html('');
+				for(var i=0;i<data.length;i++)
+				{
+					$('#table_add').append('<tr><td>'+data[i].name+'</td><td>'+data[i].price+'</td><td>'+data[i].quantity+'</td><td>'+data[i].amount+'</td>');
+				}
+				
+	}
+	
+	function saveItems()
+	{
+		localStorage.setItem('table_store',JSON.stringify(data))
+	}
+	var quan = 0
+		$(function()
+		{
+			
+			retreiveItems()
+			refreshItems()
+
+			 $('.abv').click(function()
+			 {
+
+			 	var button_Clicked = $(this).attr('id')
+			 	//alert(button_Clicked)
+			 	var item_id  = $(this).parent().attr('id')
+				
+				var x = $('#'+item_id).text()
+				
+				x = x.split(' ')
+				f=0
+				
+				for(var i=0;i<data.length;i++)
+					{
+						//alert('12')
+						
+						if(data[i].name.toString() == x[0].toString())
+						{
+							if(button_Clicked == "btn_click")
+							{
+								data[i].quantity++;
+								data[i].amount = parseInt(data[i].amount) + Number(x[1])
+								
+								quan = 1
+								break;
+							}
+							else
+							{
+								if(data[i].quantity == 0)
+								{
+									break;
+								}
+								data[i].quantity--;
+								data[i].amount = parseInt(data[i].amount) - Number(x[1])
+								if(data[i].quantity == 0)
+								{
+									data.splice(i,1)
+								}
+								
+							}
+						}
+						else
+							f++;
+						
+					}	
+					if(f== data.length)	quan= 0;
+					
+				if(quan === 0 && button_Clicked == "btn_click")
+				{
+					data.push(
+					{
+						name: x[0],
+						price: x[1],
+						quantity: 1,
+						amount: x[1]
+					})
+					
+
+				}
+				
+				saveItems();
+				refreshItems()
+			})
+		})
+	</script>
+</body>
+</html>
