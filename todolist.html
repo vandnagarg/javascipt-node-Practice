@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TodoList</title>
+</head>
+<body>
+<input type = "text" id="input_work"/>
+<button type="submit" onclick="add_work()" id="btn1"> Add</button>
+<ul id="add">
+	<!-- <li id="mLi"></li> -->
+</ul>
+<script src="jquery.js"></script>
+<script>
+		
+		$("#btn1").click(function()
+			{
+				var x= $("#input_work").val()
+		
+				$("#add").prepend("<li>" + x + "</li>");
+				
+			});
+		
+
+
+
+	// function add_work()
+	// {
+		
+		// var x = document.getElementById("input_work").value;
+		// var ul = document.createElement("UL")
+		// ul.setAttribute("id","mul")
+		// document.body.appendChild(ul);
+
+		// var li = document.createElement("LI")
+		// var item = document.createTextNode(x)
+
+		// li.appendChild(item)
+
+		// document.getElementById("mul").prepend(li);
+	//}
+</script>
+
+</body>
+</html>
